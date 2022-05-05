@@ -65,34 +65,37 @@ char	*get_next_line(int fd);
 size_t	ft_strlen( char *str);
 
 // FOR THE CHECKERS/
-void checker(int ac, char **ag)
-void check_map_content(t_map map)
-void check_if_map_is_rect(t_map map)
-int is_collector(char c)
-int is_player(char p)
+void checker(int ac, char **ag);
+void check_map_content(t_map map);
+void check_if_map_is_rect(t_map map);
+int is_wall(char *line);
+void check_is_wall(t_map map);
+int is_collector(char c);
+int is_player(char p);
 int is_collector(char c);
 int is_exit(char e);
+int valid_player(t_map map);
+int valid_collector(t_map map);
+int valid_exit(t_map map);
 
-
-void	free_double_str(char **str);
-void checker(int ac, char **ag);
-void	ft_error(void);
-int	ft_strncmp(const char *str1, const char *str2, size_t n);
-int	handle_input(int keysym, t_data *data);
-int	handle_no_event(void *data);
-void	free_double_str(char **str);
-int	handle_keypress(int keysym, t_data *data);
-int	handle_keyrelease(int keysym, void *data);
-int	render(t_data *data);
-size_t	ft_strlen( char *str);
-
+// FOR THE LIBFT/
+int	ft_putstr_fd(char *s, int fd);
+int	ft_putchar_fd(char c, int fd);
 static int	ft_ischarset(char c, char sep);
 static int	ft_countwords(char const *str, char sep);
 static char	*ft_dup(char const *str, char sep);
 char	**ft_split(char const *s, char c);
-int	ft_putstr_fd(char *s, int fd);
-int	ft_putchar_fd(char c, int fd);
-void check_if_map_is_rect(t_map map);
-void check_map_content(t_map map)
+int	ft_strncmp(const char *str1, const char *str2, size_t n);
+
+// FOR THE PROG_MANAGEMENT/
+void	ft_error(void);
+void	free_double_str(char **str);
+
+// FOR THE MAIN/
+int	handle_no_event(void *data);
+int	handle_input(int keysym, t_data *data);
+int	handle_keypress(int keysym, t_data *data);
+int	handle_keyrelease(int keysym, void *data);
+int	render(t_data *data);
 
 # endif

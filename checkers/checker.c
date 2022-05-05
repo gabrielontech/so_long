@@ -50,7 +50,7 @@ void check_if_map_is_rect(t_map map)
         {
             if(map.v_map[i + 2] != NULL)
             {
-                j++;
+                    j++;
             }
         } else 
         {
