@@ -66,17 +66,18 @@ size_t	ft_strlen( char *str);
 
 // FOR THE CHECKERS/
 void checker(int ac, char **ag);
-void check_map_content(t_map map);
-void check_if_map_is_rect(t_map map);
+void check_map_content(t_map *map);
+void check_if_map_is_rect(t_map *map);
 int is_wall(char *line);
-void check_is_wall(t_map map);
+void check_is_wall(t_map *map);
 int is_collector(char c);
 int is_player(char p);
 int is_collector(char c);
 int is_exit(char e);
-int valid_player(t_map map);
-int valid_collector(t_map map);
-int valid_exit(t_map map);
+int valid_player(t_map *map);
+int valid_collector(t_map *map);
+int valid_exit(t_map *map);
+void valid_map(t_map *map);
 
 // FOR THE LIBFT/
 int	ft_putstr_fd(char *s, int fd);
@@ -90,6 +91,9 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n);
 // FOR THE PROG_MANAGEMENT/
 void	ft_error(void);
 void	free_double_str(char **str);
+void	map_failure(t_map *map, char *msg);
+void cep_failure(t_map *map, int response);
+void	empty_map();
 
 // FOR THE MAIN/
 int	handle_no_event(void *data);

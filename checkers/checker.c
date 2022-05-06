@@ -11,21 +11,20 @@ void checker(int ac, char **ag)
     }
 }
 
-void check_map_content(t_map map)
+void check_map_content(t_map *map)
 {
     int i;
     int j;
 
     i = 0;
-    while(map.v_map[i] != NULL)
+    while(map->v_map[i] != NULL)
     {
         j = 0;
-        while(map.v_map[i][j] != '\0')
+        while(map->v_map[i][j] != '\0')
         {
-            if(map.v_map[i][j] != '0' && map.v_map[i][j] && '1' && map.v_map[i][j] && 'C' && map.v_map[i][j] != 'E' && map.v_map[i][j] != 'P')
+            if(map->v_map[i][j] != '0' && map->v_map[i][j] != '1' && map->v_map[i][j] != 'C' && map->v_map[i][j] != 'E' && map->v_map[i][j] !='P')
             {
-                ft_putstr_fd("Error : Wrong map content  \n", 2);
-                exit(EXIT_FAILURE);
+                map_failure(map ,"Wrong map content\n");
             }
             j++;
         }
@@ -33,31 +32,30 @@ void check_map_content(t_map map)
     }
 }
 
-void check_if_map_is_rect(t_map map)
+void check_if_map_is_rect(t_map *map)
 {
     int i;
     int j;
 
     i = 0;
-    while(map.v_map[i] != NULL)
+    while(map->v_map[i] != NULL)
         i++;
-    map.v_height = i;
+    map->v_height = i;
     i = 0;
     j = 1;
-    while(map.v_map[i] != NULL)
+    while(map->v_map[i] != NULL)
     {
-        if(ft_strlen(map.v_map[i]) == ft_strlen(map.v_map[j]))
+        if(ft_strlen(map->v_map[i]) == ft_strlen(map->v_map[j]))
         {
-            if(map.v_map[i + 2] != NULL)
+            if(map->v_map[i + 2] != NULL)
             {
-                    j++;
+                j++;
             }
         } else 
         {
-            ft_putstr_fd("Error : Please make sure that you map follows the rectangle rules !\n", 2);
-            exit(EXIT_FAILURE);
+            map_failure(map ,"Please make sure that you map follows the rectangle rules\n");
         } 
         i++;
     }
-    map.v_width = ft_strlen(map.v_map[0]);
+    map->v_width = ft_strlen(map->v_map[0]);
 }

@@ -1,7 +1,7 @@
 INC=/usr/include
 
 PRINTF = $(addprefix ft_printf/,ft_printf.c ft_putchar.c ft_puthexa.c ft_puthexamem.c ft_putnbr.c ft_putstr.c )
-CK = $(addprefix checkers/, checker.c map_checkers.c )
+CK = $(addprefix checkers/, checker.c is_cep_checker.c map_content_checkers.c valid_map_checker.c )   
 PM = $(addprefix prog_management/, free_style.c error.c )
 LIBFT = $(addprefix libft/, ft_strncmp.c ft_split.c ft_putstr_fd.c )
 GNL = $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c )

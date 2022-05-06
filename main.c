@@ -11,14 +11,14 @@ int	handle_no_event(void *data)
 int	handle_input(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_window(data->v_mlx_ptr, data->v_win_ptr);
 	return (0);
 }
 
 int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_window(data->v_mlx_ptr, data->v_win_ptr);
 
 	printf("Keypress: %d\n", keysym);
 	return (0);
@@ -33,8 +33,8 @@ int	handle_keyrelease(int keysym, void *data)
 int	render(t_data *data)
 {
 	/* if window has been destroyed, we don't want to put the pixel ! */
-	if (data->win_ptr != NULL)
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->perso.img, 0, 48);
+	if (data->v_win_ptr != NULL)
+		mlx_put_image_to_window(data->v_mlx_ptr, data->v_win_ptr, data->v_perso.v_img, 0, 48);
 	return (0);
 }
 
@@ -66,6 +66,8 @@ int	main(int ac, char **av)
 	while(get_next_line(fd) != NULL)
 		i++;
 	close(fd);
+	if(i == 0)
+		empty_map();
 	y = i; // storage for the height of the window
 	//get each line of my buffer until the end and store them in BUFFER STRS .
 	fd = open(av[1], O_RDONLY);
@@ -79,8 +81,7 @@ int	main(int ac, char **av)
 	}
 	close(fd);
 	map.v_map = ft_split(save, '\n');
-
-	check_if_map_is_rect(map);
+	valid_map(&map);
 	x = ft_strlen(map.v_map[0]); // storage of the width of the window
 	//mlx purpose
 	if (data.v_mlx_ptr == NULL)
@@ -93,7 +94,7 @@ int	main(int ac, char **av)
 	}
 	perso.v_relative_path = "./img/perso.xpm";
 	//map = (t_img){NULL, "./map.xpm", 48, 26};
-	perso.v_img = mlx_xpm_file_to_image(data.mlx_ptr, perso.relative_path, &perso.img_width, &perso.img_height);
+	perso.v_img = mlx_xpm_file_to_image(data.v_mlx_ptr, perso.v_relative_path, &perso.v_img_width, &perso.v_img_height);
 	if(perso.v_img == NULL)
 		return (MLX_ERROR);
 	//map.img = mlx_xpm_file_to_image(data.mlx_ptr, map.relative_path, &map.img_width, &map.img_height);
@@ -104,7 +105,6 @@ int	main(int ac, char **av)
 	mlx_hook(data.v_win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &data); /* CHANGED */
 
 	mlx_loop(data.v_mlx_ptr);
-
 	mlx_destroy_display(data.v_mlx_ptr);
 	free(data.v_mlx_ptr);
 }
