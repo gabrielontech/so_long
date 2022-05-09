@@ -44,15 +44,26 @@ typedef struct s_img
 	char	*v_relative_path;
 	int		v_img_width;
 	int		v_img_height;
+	t_vector	vector;
 
 } t_img;
+
+typedef struct s_vector
+{
+	int	v_x;
+	int	v_y;
+
+} t_vector;
 
 typedef struct s_data
 {
 	void	*v_mlx_ptr;
 	void	*v_win_ptr;
-	t_img	v_perso;
-
+	int		v_window_x;
+	int		v_window_y;
+	t_img	v_player;
+	t_img 	v_wall;
+	t_img	v_floor;
 } t_data;
 
 // FOR THE GET_NEXT_LINE/
