@@ -26,6 +26,7 @@
 #include <X11/X.h>
 # include <unistd.h>
 #include "ft_printf/ft_printf.h"
+#define MLX_ERROR 1
 # ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
 # endif
@@ -38,6 +39,13 @@ typedef struct s_map
 
 } t_map;
 
+typedef struct s_vector
+{
+	int	v_x;
+	int	v_y;
+
+} t_vector;
+
 typedef struct s_img
 {
 	void *v_img;
@@ -48,12 +56,6 @@ typedef struct s_img
 
 } t_img;
 
-typedef struct s_vector
-{
-	int	v_x;
-	int	v_y;
-
-} t_vector;
 
 typedef struct s_data
 {
@@ -61,9 +63,15 @@ typedef struct s_data
 	void	*v_win_ptr;
 	int		v_window_x;
 	int		v_window_y;
+	t_img	v_img;
+	t_map	v_map;
 	t_img	v_player;
 	t_img 	v_wall;
 	t_img	v_floor;
+	t_img	v_collect;
+	t_img	v_locked;
+	t_img	v_unlocked;
+
 } t_data;
 
 // FOR THE GET_NEXT_LINE/
@@ -106,11 +114,19 @@ void	map_failure(t_map *map, char *msg);
 void cep_failure(t_map *map, int response);
 void	empty_map();
 
+//DISPLAYERS
+void display_floor(t_data *data,t_img pic , t_vector vector);
+void display_wall(t_data *data,t_img pic , t_vector vector);
+void display_player(t_data *data,t_img pic , t_vector vector);
+void display_collect(t_data *data,t_img pic , t_vector vector);
+void display_lock(t_data *data,t_img pic , t_vector vector);
+void display_unlock(t_data *data,t_img pic , t_vector vector);
+void    displayer(t_data *data,t_img pic ,t_map *map);
+
 // FOR THE MAIN/
 int	handle_no_event(void *data);
 int	handle_input(int keysym, t_data *data);
 int	handle_keypress(int keysym, t_data *data);
 int	handle_keyrelease(int keysym, void *data);
-int	render(t_data *data);
 
 # endif
