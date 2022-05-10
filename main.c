@@ -66,7 +66,10 @@ int	main(int ac, char **av)
 	//get every line of my .ber and store them in the i variable for BUFFER STRS size.
 	fd = open(av[1], O_RDONLY);
 	if(fd < 0)
-		return(0);
+	{
+		ft_putstr_fd("Error:\n No such file or directory\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	while(get_next_line(fd) != NULL)
 		i++;
 	close(fd);
@@ -83,7 +86,6 @@ int	main(int ac, char **av)
 		save = ft_strjoin(save, strs);
 		j++;
 	}
-	printf("save = %s\n", save);
 	close(fd);
 	map.v_map = ft_split(save, '\n');
 	valid_map(&map);
@@ -92,8 +94,8 @@ int	main(int ac, char **av)
 	//mlx purpose
 	if (data.v_mlx_ptr == NULL)
 		return (MLX_ERROR);
-	data.v_win_ptr = mlx_new_window(data.v_mlx_ptr, data.v_window_y * 48, data.v_window_x * 48, "My first window!");
-	data.v_img.v_img = mlx_new_image(data.v_mlx_ptr, data.v_window_y * 48, data.v_window_x * 48);
+	data.v_win_ptr = mlx_new_window(data.v_mlx_ptr, data.v_window_x * 48, data.v_window_y * 48, "So_long");
+	data.v_img.v_img = mlx_new_image(data.v_mlx_ptr, data.v_window_x * 48, data.v_window_y * 48);
 	displayer(&data, data.v_img, &map);
 	if (data.v_win_ptr == NULL)
 	{

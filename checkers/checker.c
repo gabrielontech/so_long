@@ -9,7 +9,13 @@ void checker(int ac, char **ag)
         ft_putstr_fd("Error : Wrong type file, file name must : <filename>.ber\n", 2);
         exit(EXIT_FAILURE);
     }
-}
+   /* if!((ft_strchr(ag[1], '.')))
+    {
+        ft_putstr_fd("Error : Wrong type file, file name must : <filename>.ber\n", 2);
+        exit(EXIT_FAILURE);
+    }
+    */
+ }   
 
 void check_map_content(t_map *map)
 {
