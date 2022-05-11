@@ -31,13 +31,23 @@
 # define BUFFER_SIZE 42
 # endif
 
+typedef struct s_game
+{
+	int v_move;
+	int	v_collect;
+	int v_collect_nb;
+
+} t_game; 
+
 typedef struct s_map
 {
 	char **v_map;
 	int v_width;
 	int v_height;
+	t_game	v_game;
 
 } t_map;
+
 
 typedef struct s_vector
 {
@@ -64,7 +74,7 @@ typedef struct s_data
 	int		v_window_x;
 	int		v_window_y;
 	t_img	v_img;
-	t_map	v_map;
+	t_map	*v_map;
 	t_img	v_player;
 	t_img 	v_wall;
 	t_img	v_floor;
@@ -97,6 +107,7 @@ int valid_player(t_map *map);
 int valid_collector(t_map *map);
 int valid_exit(t_map *map);
 void valid_map(t_map *map);
+int collect_valid(t_map *map);
 
 // FOR THE LIBFT/
 int	ft_putstr_fd(char *s, int fd);
@@ -113,6 +124,8 @@ void	free_double_str(char **str);
 void	map_failure(t_map *map, char *msg);
 void cep_failure(t_map *map, int response);
 void	empty_map();
+void	file_not_found(void);
+void	endgame(t_data *data, t_map *map);
 
 //DISPLAYERS
 void display_floor(t_data *data,t_img pic , t_vector vector);
@@ -128,5 +141,17 @@ int	handle_no_event(void *data);
 int	handle_input(int keysym, t_data *data);
 int	handle_keypress(int keysym, t_data *data);
 int	handle_keyrelease(int keysym, void *data);
+
+//MOVE
+void    move_down(t_data *data, t_map *map);
+void swap_char(char *a, char *b);
+void    move_left(t_data *data, t_map *map);
+void    move_right(t_data *data, t_map *map);
+void    move_up(t_data *data, t_map *map);
+
+//INIT
+int    get_w_height(t_data *data, char **av);
+int     get_w_width(t_data *data, char **av, int i, t_map *map);
+void init_window(t_data *data, char **av, t_map *map);
 
 # endif

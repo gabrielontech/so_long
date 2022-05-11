@@ -48,20 +48,16 @@ void check_if_map_is_rect(t_map *map)
         i++;
     map->v_height = i;
     i = 0;
-    j = 1;
+    j = ft_strlen(map->v_map[0]);
+
+
     while(map->v_map[i] != NULL)
     {
-        if(ft_strlen(map->v_map[i]) == ft_strlen(map->v_map[j]))
-        {
-            if(map->v_map[i + 2] != NULL)
-            {
-                j++;
-            }
-        } else 
+        if(ft_strlen(map->v_map[i]) != j)
         {
             map_failure(map ,"Please make sure that you map follows the rectangle rules\n");
         } 
         i++;
     }
-    map->v_width = ft_strlen(map->v_map[0]);
+    map->v_width = j;
 }

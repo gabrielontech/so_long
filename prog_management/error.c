@@ -8,6 +8,12 @@ void	map_failure(t_map *map, char *msg)
 	exit(EXIT_FAILURE);
 }
 
+void	file_not_found(void)
+{
+	ft_putstr_fd("Error:\nNo such file or directory\n", 2);
+	exit(EXIT_FAILURE);
+}
+
 void	empty_map(void)
 {
 	ft_putstr_fd("Error:\nEmpty map\n", 2);
