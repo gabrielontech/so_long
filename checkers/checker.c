@@ -31,6 +31,7 @@ void check_map_content(t_map *map)
             if(map->v_map[i][j] != '0' && map->v_map[i][j] != '1' && map->v_map[i][j] != 'C' && map->v_map[i][j] != 'E' && map->v_map[i][j] !='P')
             {
                 map_failure(map ,"Wrong map content\n");
+		        exit(EXIT_FAILURE);
             }
             j++;
         }
@@ -49,13 +50,11 @@ void check_if_map_is_rect(t_map *map)
     map->v_height = i;
     i = 0;
     j = ft_strlen(map->v_map[0]);
-
-
     while(map->v_map[i] != NULL)
     {
         if(ft_strlen(map->v_map[i]) != j)
         {
-            map_failure(map ,"Please make sure that you map follows the rectangle rules\n");
+            map_failure(map ,"Please make sure that you map follows the rectangle rules\n");   
         } 
         i++;
     }

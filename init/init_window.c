@@ -37,6 +37,8 @@ int     get_w_width(t_data *data, char **av, int i, t_map *map)
         free(str);
         j++;
     }
+    ft_printf("str : %s\n", map_to_str);
+    exit(0);
     close(fd);
     map->v_map = ft_split(map_to_str, '\n');
     free(map_to_str);
@@ -54,7 +56,9 @@ void init_window(t_data *data, char **av, t_map *map)
     if (data->v_win_ptr == NULL)
 	{
        // free_double_str(map->v_map);
-		free(data->v_win_ptr);
+       	mlx_destroy_display(data->v_mlx_ptr);
+	    mlx_destroy_window(data->v_mlx_ptr, data->v_win_ptr);
+        free_double_str(data->v_map->v_map);
 		exit(EXIT_FAILURE);
-	}  
+	} 
 }

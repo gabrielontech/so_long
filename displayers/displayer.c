@@ -12,6 +12,7 @@ void    displayer(t_data *data, t_img pic, t_map *map)
     vector.v_y = 0;
     while(map->v_map[i] != NULL)
     {
+         j = 0;
         while(map->v_map[i][j]){
            if(map->v_map[i][j] == '1')
                 display_wall(data, pic, vector);
@@ -31,6 +32,5 @@ void    displayer(t_data *data, t_img pic, t_map *map)
         vector.v_y += 48;
         vector.v_x = 0;
         i++;
-        j = 0;
     }
 }

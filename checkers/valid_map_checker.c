@@ -33,5 +33,5 @@ void valid_map(t_map *map)
     if(valid_player(map) == 0)
         cep_failure(map, 1);
     map->v_game.v_collect_nb = collect_valid(map);
-    printf("nb de collectible %d\n", map->v_game.v_collect_nb);
+   // printf("nb de collectible %d\n", map->v_game.v_collect_nb);
 }

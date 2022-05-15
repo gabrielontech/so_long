@@ -3,7 +3,7 @@
 int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-		mlx_destroy_window(data->v_mlx_ptr, data->v_win_ptr);
+		endgame(data, data->v_map);
 	if (keysym == 119 || keysym == 65362)
 		move_up(data, data->v_map);
 	if (keysym == 115 || keysym == 65364)
@@ -19,6 +19,9 @@ int	render(t_data *data)
 {
 	if (data->v_win_ptr != NULL){
 		displayer(data, data->v_img ,data->v_map);
+	}else if(data->v_win_ptr ==  NULL)
+	{
+		endgame(data, data->v_map);
 	}
 	return (0);
 }
