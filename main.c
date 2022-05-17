@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	{
 		free(data.v_mlx_ptr);
 		exit(EXIT_FAILURE);
-	}  
+	}
 	init_window(&data, av, &map);
 	mlx_loop_hook(data.v_mlx_ptr, &render, &data);
 	mlx_hook(data.v_win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data); 

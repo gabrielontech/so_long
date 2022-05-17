@@ -1,16 +1,25 @@
 #include "../so_long.h"
 
-int    get_w_height(t_data *data, char **av)
+int    get_w_height(char **av)
 {
-    int fd;
+	int fd;
     int     i;
+	char *tmp;
 
+	tmp = NULL;
     i = 0;
     fd = open(av[1], O_RDONLY);
     if(fd < 0)
-        file_not_found();
-    while(get_next_line(fd) != NULL)
-        i++;
+	{
+		printf("fd fail");
+	}
+    while((tmp = get_next_line(fd)) != NULL){
+		i++;
+		free(tmp);
+		tmp = NULL;
+    }
+	free(tmp);
+	tmp = NULL;
     close(fd);
     if(i == 0)
         empty_map();
@@ -24,7 +33,7 @@ int     get_w_width(t_data *data, char **av, int i, t_map *map)
 	int j;
     int fd;
 
-    str = "wait";
+    str = NULL;
     map_to_str = NULL;
     j = 0;
     fd = open(av[1], O_RDONLY);
@@ -35,10 +44,12 @@ int     get_w_width(t_data *data, char **av, int i, t_map *map)
         str = get_next_line(fd);
         map_to_str = ft_strjoin(map_to_str, str);
         free(str);
+        str = NULL;
         j++;
     }
+    free(str);
+    str = NULL;
     ft_printf("str : %s\n", map_to_str);
-    exit(0);
     close(fd);
     map->v_map = ft_split(map_to_str, '\n');
     free(map_to_str);
@@ -49,8 +60,8 @@ int     get_w_width(t_data *data, char **av, int i, t_map *map)
 
 void init_window(t_data *data, char **av, t_map *map)
 {
-    data->v_window_x = (get_w_height(data, av)) * 48;
-    data->v_window_y = (get_w_width(data, av, get_w_height(data, av), map) * 48);
+    data->v_window_x = (get_w_height(av)) * 48;
+    data->v_window_y = (get_w_width(data, av, get_w_height(av), map) * 48);
     data->v_win_ptr = mlx_new_window(data->v_mlx_ptr, data->v_window_y, data->v_window_x, "So_long");
 	data->v_img.v_img = mlx_new_image(data->v_mlx_ptr, data->v_window_y, data->v_window_x);   
     if (data->v_win_ptr == NULL)

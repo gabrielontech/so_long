@@ -6,7 +6,7 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:40:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/02/25 13:27:45 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:01:04 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long.h"
@@ -22,6 +22,7 @@ char	*ft_get_line(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	buffer = malloc(sizeof(char) * i + 2);
+	printf("malloc buffer de get_line = %p\n", buffer);
 	if (!buffer)
 		return (NULL);
 	i = 0;
@@ -49,11 +50,9 @@ char	*ft_save(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	if (!save[i])
-	{
-		free(save);
-		return (NULL);
-	}
-	buffer = malloc(sizeof(char) * (ft_strlen(save) - i + 1));
+		return (free(save), NULL);
+	buffer = malloc(sizeof(char) * (strlen(save) - i + 1));
+	printf("malloc buffer de ft_save = %p\n", buffer);
 	if (!buffer)
 		return (NULL);
 	i++;
@@ -61,30 +60,40 @@ char	*ft_save(char *save)
 	while (save[i])
 		buffer[j++] = save[i++];
 	buffer[j] = '\0';
+	printf("free de save dans ft_save  %p\n", save);
 	free(save);
 	return (buffer);
 }
 
-char	*read_line(int fd, char *save)
+char	*read_line(int fd, char *save, int *v_read)
 {
 	char	*buffer;
-	int		v_read;
+	//int		v_read;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	v_read = 1;
-	while (!ft_strchr(save, '\n') && v_read != 0)
+	printf("malloc buffer de readline = %p\n", buffer);
+	if (!buffer)	
+	{
+		printf("free de save dans read line %p\n", save);
+		free(save);
+		return (NULL);	
+	}
+	*v_read = 1;
+	while (!ft_strchr(save, '\n') && *v_read != 0)
 	{	
-		v_read = read(fd, buffer, BUFFER_SIZE);
-		if (v_read == -1)
+		*v_read = read(fd, buffer, BUFFER_SIZE);
+		if (*v_read == -1)
 		{
+			printf("free de save %p\n , et free de buffer  readline %p\n", save, buffer);
 			free(buffer);
+			free(save);
 			return (NULL);
 		}
-		buffer[v_read] = '\0';
-		save = ft_strjoin(save, buffer);
+		buffer[*v_read] = '\0';
+		if(*v_read)
+			save = ft_strjoin(save, buffer);
 	}
+	printf("free de buffer de readline = %p\n", buffer);
 	free(buffer);
 	return (save);
 }
@@ -93,13 +102,22 @@ char	*get_next_line(int fd)
 {
 	char		*buffer;
 	static char	*save;
+	int	ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	save = read_line(fd, save);
+	save = read_line(fd, save, &ret);
 	if (!save)
 		return (NULL);
 	buffer = ft_get_line(save);
+	if(!buffer){
+		printf("free de save %p\n , et free de buffer  get_next_line %p\n", save, buffer);
+		free(save);
+		return(free(buffer), NULL);
+	}
 	save = ft_save(save);
+	printf("ret =  %d\n", ret);
+	if(!ret)
+		free(save); 
 	return (buffer);
 }

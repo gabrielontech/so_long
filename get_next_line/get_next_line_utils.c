@@ -6,7 +6,7 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 03:18:08 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/02/25 13:48:40 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/16 09:39:35 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s2)
 		return (NULL);
 	res = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (res == NULL)
+	printf("malloc res de str_join = %p\n", res);
+	if (!res)
 		return (NULL);
 	while (s1 && s1[i])
 		res[k++] = s1[i++];
 	while (s2[j])
 		res[k++] = s2[j++];
 	res[k] = '\0';
-	free(s1);
+	if(s1){
+		printf("free s1 de str_join = %p\n", s1);
+		free(s1);
+	}
 	return (res);
 }

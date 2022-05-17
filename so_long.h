@@ -89,7 +89,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *str, int c);
 char	*ft_get_line(char *save);
 char	*ft_save(char *save);
-char	*read_line(int fd, char *save);
+char	*read_line(int fd, char *save, int *v_read);
 char	*get_next_line(int fd);
 size_t	ft_strlen( char *str);
 
@@ -150,7 +150,7 @@ void    move_right(t_data *data, t_map *map);
 void    move_up(t_data *data, t_map *map);
 
 //INIT
-int    get_w_height(t_data *data, char **av);
+int    get_w_height(char **av);
 int     get_w_width(t_data *data, char **av, int i, t_map *map);
 void init_window(t_data *data, char **av, t_map *map);
 
