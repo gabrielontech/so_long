@@ -22,7 +22,6 @@ char	*ft_get_line(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	buffer = malloc(sizeof(char) * i + 2);
-	printf("malloc buffer de get_line = %p\n", buffer);
 	if (!buffer)
 		return (NULL);
 	i = 0;
@@ -50,9 +49,8 @@ char	*ft_save(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	if (!save[i])
-		return (free(save), NULL);
+		return(ft_free(save), NULL);
 	buffer = malloc(sizeof(char) * (strlen(save) - i + 1));
-	printf("malloc buffer de ft_save = %p\n", buffer);
 	if (!buffer)
 		return (NULL);
 	i++;
@@ -60,64 +58,53 @@ char	*ft_save(char *save)
 	while (save[i])
 		buffer[j++] = save[i++];
 	buffer[j] = '\0';
-	printf("free de save dans ft_save  %p\n", save);
-	free(save);
+	ft_free(save);
 	return (buffer);
 }
 
 char	*read_line(int fd, char *save, int *v_read)
 {
 	char	*buffer;
-	//int		v_read;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	printf("malloc buffer de readline = %p\n", buffer);
 	if (!buffer)	
-	{
-		printf("free de save dans read line %p\n", save);
-		free(save);
 		return (NULL);	
-	}
 	*v_read = 1;
 	while (!ft_strchr(save, '\n') && *v_read != 0)
 	{	
 		*v_read = read(fd, buffer, BUFFER_SIZE);
 		if (*v_read == -1)
 		{
-			printf("free de save %p\n , et free de buffer  readline %p\n", save, buffer);
-			free(buffer);
-			free(save);
+			ft_free(buffer);
 			return (NULL);
 		}
 		buffer[*v_read] = '\0';
 		if(*v_read)
 			save = ft_strjoin(save, buffer);
 	}
-	printf("free de buffer de readline = %p\n", buffer);
-	free(buffer);
+	ft_free(buffer);
 	return (save);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*save;
-	int	ret;
+	static char	*save = (char *)0;
+	int			ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		ft_free(save);
 		return (NULL);
+	}
 	save = read_line(fd, save, &ret);
 	if (!save)
 		return (NULL);
 	buffer = ft_get_line(save);
-	if(!buffer){
-		printf("free de save %p\n , et free de buffer  get_next_line %p\n", save, buffer);
-		free(save);
-		return(free(buffer), NULL);
-	}
+	if(!buffer)
+		return(ft_free(buffer), NULL);
 	save = ft_save(save);
-	printf("ret =  %d\n", ret);
 	if(!ret)
-		free(save); 
+		ft_free(save);
 	return (buffer);
 }

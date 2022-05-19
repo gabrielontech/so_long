@@ -21,17 +21,16 @@ int collect_valid(t_map *map)
     }
     return(collect);
 }
-void valid_map(t_map *map)
+void valid_map(t_map *map, t_data *data)
 {
-    check_map_content(map);
-    check_if_map_is_rect(map);
-    check_is_wall(map);
+    check_map_content(map, data);
+    check_if_map_is_rect(map, data);
+    check_is_wall(map, data);
     if(valid_collector(map) == 0)
-        cep_failure(map, 2);
+        cep_failure(map ,data, 2);
     if(valid_exit(map) == 0)
-        cep_failure(map, 2);
+        cep_failure(map, data, 2);
     if(valid_player(map) == 0)
-        cep_failure(map, 1);
+        cep_failure(map, data ,1);
     map->v_game.v_collect_nb = collect_valid(map);
-   // printf("nb de collectible %d\n", map->v_game.v_collect_nb);
 }

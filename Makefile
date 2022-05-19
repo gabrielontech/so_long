@@ -19,7 +19,7 @@ OBJ = $(SRC:%.c=%.o)
 RM = rm -rf
 
 
-LFLAGS = -fsanitize=address -L./minilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -g3
+LFLAGS = -L./minilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -g3
 
 CC= gcc
 LFLAGS += -lbsd

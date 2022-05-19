@@ -7,7 +7,10 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == 119 || keysym == 65362)
 		move_up(data, data->v_map);
 	if (keysym == 115 || keysym == 65364)
+	{
+		printf("heheheehhe\n");
 		move_down(data, data->v_map);
+	}
 	if (keysym == 97 || keysym == 65361)
 		move_left(data, data->v_map);
 	if (keysym == 100 || keysym == 65363)
@@ -17,18 +20,15 @@ int	handle_keypress(int keysym, t_data *data)
 
 int	render(t_data *data)
 {
-	if (data->v_win_ptr != NULL){
-		displayer(data, data->v_img ,data->v_map);
-	}else if(data->v_win_ptr ==  NULL)
-	{
+	if (data->v_win_ptr != NULL)
+		displayer(data, data->v_map);
+	else if(data->v_win_ptr ==  NULL)
 		endgame(data, data->v_map);
-	}
 	return (0);
 }
 
 int	handle_keyrelease(int keysym, void *data)
 {
-
 	return (0);
 }
 
@@ -42,15 +42,12 @@ int	main(int ac, char **av)
 	map.v_game.v_collect_nb = 0;
 	checker(ac, av);
 	data.v_mlx_ptr = mlx_init();
-	 if (data.v_mlx_ptr == NULL)
-	{
-		free(data.v_mlx_ptr);
-		exit(EXIT_FAILURE);
-	}
+	if (data.v_mlx_ptr == NULL)
+		quit(&data);
 	init_window(&data, av, &map);
+	init_img(&data);
 	mlx_loop_hook(data.v_mlx_ptr, &render, &data);
 	mlx_hook(data.v_win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data); 
-	//mlx_hook(data.v_win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &data);
-
+	//mlx_key_hook(data.v_win_ptr, &handle_keypress, (void *)&data);
 	mlx_loop(data.v_mlx_ptr);
 }

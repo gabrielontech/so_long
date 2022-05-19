@@ -12,6 +12,12 @@
 
 #include "../so_long.h"
 
+void ft_free(char *str)
+{
+	free(str);
+	str = NULL;
+}
+
 size_t	ft_strlen(char *str)
 {
 	size_t	i;
@@ -59,7 +65,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s2)
 		return (NULL);
 	res = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
-	printf("malloc res de str_join = %p\n", res);
 	if (!res)
 		return (NULL);
 	while (s1 && s1[i])
@@ -68,8 +73,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		res[k++] = s2[j++];
 	res[k] = '\0';
 	if(s1){
-		printf("free s1 de str_join = %p\n", s1);
 		free(s1);
+		s1 = NULL;
 	}
 	return (res);
 }

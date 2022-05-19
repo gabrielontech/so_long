@@ -72,7 +72,7 @@ int valid_exit(t_map *map)
     return(valid);
 }
 
-void check_is_wall(t_map *map)
+void check_is_wall(t_map *map, t_data *data)
 {
     int i;
     int j;
@@ -81,15 +81,15 @@ void check_is_wall(t_map *map)
     i = 0;
     j = 0;
     if(!(is_wall(map->v_map[i])))
-        map_failure(map, "your map must be surrounded by a wall\n");
+        map_failure(map, data ,"your map must be surrounded by a wall\n");
     if(!(is_wall(map->v_map[(map->v_height) - 1])))
-        map_failure(map, "your map must be surrounded by a wall\n");
+        map_failure(map, data,"your map must be surrounded by a wall\n");
     while(map->v_map[i] != NULL)
     {
         if(map->v_map[i][j] != '1')
-            map_failure(map, "your map must be surrounded by a wall\n");
+            map_failure(map, data,"your map must be surrounded by a wall\n");
         if(map->v_map[i][(map->v_width) - 1] != '1')
-            map_failure(map, "your map must be surrounded by a wall\n");
+            map_failure(map, data,"your map must be surrounded by a wall\n");
         i++;
     }
 }

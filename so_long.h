@@ -28,7 +28,7 @@
 #include "ft_printf/ft_printf.h"
 #define MLX_ERROR 1
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1024
 # endif
 
 typedef struct s_game
@@ -62,8 +62,7 @@ typedef struct s_img
 	char	*v_relative_path;
 	int		v_img_width;
 	int		v_img_height;
-	t_vector	vector;
-
+	t_vector	vector;	
 } t_img;
 
 
@@ -91,14 +90,15 @@ char	*ft_get_line(char *save);
 char	*ft_save(char *save);
 char	*read_line(int fd, char *save, int *v_read);
 char	*get_next_line(int fd);
+void ft_free(char *str);
 size_t	ft_strlen( char *str);
 
 // FOR THE CHECKERS/
 void checker(int ac, char **ag);
-void check_map_content(t_map *map);
-void check_if_map_is_rect(t_map *map);
+void check_map_content(t_map *map, t_data *data);
+void check_if_map_is_rect(t_map *map, t_data *data);
 int is_wall(char *line);
-void check_is_wall(t_map *map);
+void check_is_wall(t_map *map, t_data *data);
 int is_collector(char c);
 int is_player(char p);
 int is_collector(char c);
@@ -106,7 +106,7 @@ int is_exit(char e);
 int valid_player(t_map *map);
 int valid_collector(t_map *map);
 int valid_exit(t_map *map);
-void valid_map(t_map *map);
+void valid_map(t_map *map, t_data *data);
 int collect_valid(t_map *map);
 
 // FOR THE LIBFT/
@@ -121,20 +121,22 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n);
 // FOR THE PROG_MANAGEMENT/
 void	ft_error(void);
 void	free_double_str(char **str);
-void	map_failure(t_map *map, char *msg);
-void cep_failure(t_map *map, int response);
-void	empty_map();
+void	map_failure(t_map *map, t_data *data , char *msg);
+void cep_failure(t_map *map, t_data *data , int response);
+void	empty_map(t_data *data);
 void	file_not_found(void);
 void	endgame(t_data *data, t_map *map);
+void quit(t_data *data);
 
 //DISPLAYERS
-void display_floor(t_data *data,t_img pic , t_vector vector);
-void display_wall(t_data *data,t_img pic , t_vector vector);
-void display_player(t_data *data,t_img pic , t_vector vector);
-void display_collect(t_data *data,t_img pic , t_vector vector);
-void display_lock(t_data *data,t_img pic , t_vector vector);
-void display_unlock(t_data *data,t_img pic , t_vector vector);
-void    displayer(t_data *data,t_img pic ,t_map *map);
+void display_floor(t_data *data, t_vector vector);
+void display_wall(t_data *data, t_vector vector);
+void display_player(t_data *data, t_vector vector);
+void display_collect(t_data *data, t_vector vector);
+void display_lock(t_data *data, t_vector vector);
+void display_unlock(t_data *data, t_vector vector);
+void    init_img(t_data *data);
+void    displayer(t_data *data, t_map *map);
 
 // FOR THE MAIN/
 int	handle_no_event(void *data);
@@ -150,7 +152,7 @@ void    move_right(t_data *data, t_map *map);
 void    move_up(t_data *data, t_map *map);
 
 //INIT
-int    get_w_height(char **av);
+int    get_w_height(char **av, t_data *data);
 int     get_w_width(t_data *data, char **av, int i, t_map *map);
 void init_window(t_data *data, char **av, t_map *map);
 

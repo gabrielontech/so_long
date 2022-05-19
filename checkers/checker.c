@@ -4,20 +4,19 @@ void checker(int ac, char **ag)
 {
     if(ac != 2)
         ft_error();
+    if(!(ft_strchr(ag[1], '.')))
+    {
+        ft_putstr_fd("Error :\nWrong type file, file name must : <filename>.ber\n", 2);
+        exit(0);
+    }
     if(ft_strncmp(ft_strchr(ag[1], '.'), ".ber", 4) != 0)
     {
-        ft_putstr_fd("Error : Wrong type file, file name must : <filename>.ber\n", 2);
-        exit(EXIT_FAILURE);
+        ft_putstr_fd("Error :\nWrong type file, file name must : <filename>.ber\n", 2);
+        exit(0);
     }
-   /* if!((ft_strchr(ag[1], '.')))
-    {
-        ft_putstr_fd("Error : Wrong type file, file name must : <filename>.ber\n", 2);
-        exit(EXIT_FAILURE);
-    }
-    */
  }   
 
-void check_map_content(t_map *map)
+void check_map_content(t_map *map, t_data *data)
 {
     int i;
     int j;
@@ -29,17 +28,14 @@ void check_map_content(t_map *map)
         while(map->v_map[i][j] != '\0')
         {
             if(map->v_map[i][j] != '0' && map->v_map[i][j] != '1' && map->v_map[i][j] != 'C' && map->v_map[i][j] != 'E' && map->v_map[i][j] !='P')
-            {
-                map_failure(map ,"Wrong map content\n");
-		        exit(EXIT_FAILURE);
-            }
+                map_failure(map, data ,"Wrong map content\n");
             j++;
         }
         i++;
     }
 }
 
-void check_if_map_is_rect(t_map *map)
+void check_if_map_is_rect(t_map *map, t_data *data)
 {
     int i;
     int j;
@@ -53,9 +49,7 @@ void check_if_map_is_rect(t_map *map)
     while(map->v_map[i] != NULL)
     {
         if(ft_strlen(map->v_map[i]) != j)
-        {
-            map_failure(map ,"Please make sure that you map follows the rectangle rules\n");   
-        } 
+            map_failure(map, data ,"Please make sure that you map follows the rectangle rules\n");
         i++;
     }
     map->v_width = j;

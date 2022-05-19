@@ -29,9 +29,7 @@ int is_wall(char *line)
     while(line[i] != '\0')
     {
         if(line[i] != '1')
-        {
             return(0);
-        }
         i++;
     }
     return(1);
