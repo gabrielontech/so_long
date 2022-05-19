@@ -36,7 +36,6 @@ typedef struct s_game
 	int v_move;
 	int	v_collect;
 	int v_collect_nb;
-
 } t_game; 
 
 typedef struct s_map
