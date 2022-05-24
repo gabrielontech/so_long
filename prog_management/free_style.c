@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_style.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 16:16:50 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/05/23 10:50:54 by gkitoko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 void	free_double_str(char **str)
@@ -15,13 +27,14 @@ void	free_double_str(char **str)
 	str = NULL;
 }
 
-void quit(t_data *data)
+void	quit(t_data *data)
 {
 	mlx_destroy_display(data->v_mlx_ptr);
 	free(data->v_mlx_ptr);
 	data->v_mlx_ptr = NULL;
 	exit(0);
 }
+
 void	endgame(t_data *data, t_map *map)
 {
 	free_double_str(data->v_map->v_map);

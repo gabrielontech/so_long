@@ -6,13 +6,13 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 03:18:08 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/05/16 09:39:35 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:47:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void ft_free(char *str)
+void	ft_free(char *str)
 {
 	free(str);
 	str = NULL;
@@ -72,7 +72,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j])
 		res[k++] = s2[j++];
 	res[k] = '\0';
-	if(s1){
+	if (s1)
+	{
 		free(s1);
 		s1 = NULL;
 	}

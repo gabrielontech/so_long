@@ -6,7 +6,7 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:40:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/05/16 15:01:04 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:46:20 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long.h"
@@ -49,7 +49,7 @@ char	*ft_save(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	if (!save[i])
-		return(ft_free(save), NULL);
+		return (ft_free(save), NULL);
 	buffer = malloc(sizeof(char) * (strlen(save) - i + 1));
 	if (!buffer)
 		return (NULL);
@@ -67,8 +67,8 @@ char	*read_line(int fd, char *save, int *v_read)
 	char	*buffer;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)	
-		return (NULL);	
+	if (!buffer)
+		return (NULL);
 	*v_read = 1;
 	while (!ft_strchr(save, '\n') && *v_read != 0)
 	{	
@@ -79,7 +79,7 @@ char	*read_line(int fd, char *save, int *v_read)
 			return (NULL);
 		}
 		buffer[*v_read] = '\0';
-		if(*v_read)
+		if (*v_read)
 			save = ft_strjoin(save, buffer);
 	}
 	ft_free(buffer);
@@ -101,10 +101,10 @@ char	*get_next_line(int fd)
 	if (!save)
 		return (NULL);
 	buffer = ft_get_line(save);
-	if(!buffer)
-		return(ft_free(buffer), NULL);
+	if (!buffer)
+		return (ft_free(buffer), NULL);
 	save = ft_save(save);
-	if(!ret)
+	if (!ret)
 		ft_free(save);
 	return (buffer);
 }

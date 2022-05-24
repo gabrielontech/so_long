@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_move.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 16:18:41 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/05/23 15:20:30 by gkitoko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 void swap_char(char *a, char *b)
@@ -121,12 +133,12 @@ void    move_right(t_data *data, t_map *map)
                 {
                     map->v_game.v_move++;
                     ft_printf("Nombre de pas: %d\n", map->v_game.v_move);
-                    endgame(data, map);    
+                    endgame(data, map);
                 }
                 map->v_game.v_move++;
                 printf("Nombre de pas: %d\n", map->v_game.v_move);
                 return ;
-            }   
+            }
             j++;
         }
         i++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 16:16:21 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/05/24 08:18:24 by gkitoko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	handle_keypress(int keysym, t_data *data)
@@ -19,7 +31,7 @@ int	render(t_data *data)
 {
 	if (data->v_win_ptr != NULL)
 		displayer(data, data->v_map);
-	else if(data->v_win_ptr ==  NULL)
+	else if (data->v_win_ptr == NULL)
 		endgame(data, data->v_map);
 	return (0);
 }
@@ -57,6 +69,6 @@ int	main(int ac, char **av)
 	init_img(&data);
 	mlx_loop_hook(data.v_mlx_ptr, &render, &data);
 	mlx_hook(data.v_win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-	mlx_hook(data.v_win_ptr, 17, KeyPressMask, &destroy_window, (void *)&data); 
+	mlx_hook(data.v_win_ptr, 17, KeyPressMask, &destroy_window, (void *)&data);
 	mlx_loop(data.v_mlx_ptr);
 }
