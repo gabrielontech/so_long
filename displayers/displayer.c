@@ -6,7 +6,7 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 16:23:29 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/05/23 14:42:15 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/24 10:48:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_img(t_data *data)
 	&data->v_collect.v_img_height);
 	data->v_player.v_relative_path = "./img/player.xpm";
 	data->v_player.v_img = mlx_xpm_file_to_image(data->v_mlx_ptr, \
-	&data->v_player.v_relative_path, &data->v_player.v_img_width, \
+	data->v_player.v_relative_path, &data->v_player.v_img_width, \
 	&data->v_player.v_img_height);
 	data->v_wall.v_relative_path = "./img/wall.xpm";
 	data->v_wall.v_img = mlx_xpm_file_to_image(data->v_mlx_ptr, \
@@ -42,13 +42,13 @@ void	init_img(t_data *data)
 
 void	small_displayer(t_data *data, t_map *map, char c_map, t_vector vector)
 {
-	if (map->v_map[i][j] == '1')
+	if (c_map == '1')
 		display_wall(data, vector);
-	if (map->v_map[i][j] == 'P')
+	if (c_map == 'P')
 		display_player(data, vector);
-	if (map->v_map[i][j] == 'C')
+	if (c_map == 'C')
 		display_collect(data, vector);
-	if (map->v_map[i][j] == '0')
+	if (c_map == '0')
 		display_floor(data, vector);
 	if (c_map == 'E' && map->v_game.v_collect_nb != map->v_game.v_collect)
 		display_lock(data, vector);

@@ -6,7 +6,7 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 16:16:21 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/05/24 08:18:24 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/24 12:02:06 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	handle_keypress(int keysym, t_data *data)
 
 int	render(t_data *data)
 {
-	if (data->v_win_ptr != NULL)
+	int i = 0;
+	if (data->v_win_ptr != NULL){
 		displayer(data, data->v_map);
+	}
 	else if (data->v_win_ptr == NULL)
 		endgame(data, data->v_map);
 	return (0);
