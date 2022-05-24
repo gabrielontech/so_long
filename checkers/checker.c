@@ -18,14 +18,12 @@ void	checker(int ac, char **ag)
 		ft_error();
 	if (!(ft_strchr(ag[1], '.')))
 	{
-		ft_putstr_fd("Error :\nWrong type \
-			file, file name must be named as: <filename>.ber\n", 2);
+		ft_putstr_fd("Error :\nfile name must be named as: <filename>.ber\n", 2);
 		exit(0);
 	}
 	if (ft_strncmp(ft_strchr(ag[1], '.'), ".ber", 4) != 0)
 	{
-		ft_putstr_fd("Error :\nWrong type file, \
-			file name must be named as: <filename>.ber\n", 2);
+		ft_putstr_fd("Error :\nfile name must be named as: <filename>.ber\n", 2);
 		exit(0);
 	}
 }
@@ -65,8 +63,7 @@ void	check_if_map_is_rect(t_map *map, t_data *data)
 	while (map->v_map[i] != NULL)
 	{
 		if (ft_strlen(map->v_map[i]) != j)
-			map_failure(map, data, "Please make sure that \
-			your map follows the rectangle rules\n");
+			map_failure(map, data, "Map must be a rectangle\n");
 		i++;
 	}
 	map->v_width = j;

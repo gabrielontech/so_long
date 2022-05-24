@@ -6,7 +6,7 @@
 /*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 16:16:21 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/05/24 12:02:06 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/05/24 18:01:18 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,20 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		endgame(data, data->v_map);
 	if (keysym == 119 || keysym == 65362)
-		move_up(data, data->v_map);
+		move(data, data->v_map, keysym);
 	if (keysym == 115 || keysym == 65364)
-		move_down(data, data->v_map);
+		move(data, data->v_map, keysym);
 	if (keysym == 97 || keysym == 65361)
-		move_left(data, data->v_map);
+		move(data, data->v_map, keysym);
 	if (keysym == 100 || keysym == 65363)
-		move_right(data, data->v_map);
+		move(data, data->v_map, keysym);
 	return (0);
 }
 
 int	render(t_data *data)
 {
-	int i = 0;
-	if (data->v_win_ptr != NULL){
+	if (data->v_win_ptr != NULL)
 		displayer(data, data->v_map);
-	}
 	else if (data->v_win_ptr == NULL)
 		endgame(data, data->v_map);
 	return (0);

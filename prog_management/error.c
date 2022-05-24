@@ -34,11 +34,9 @@ void	empty_map(t_data *data)
 void	cep_failure(t_map *map, t_data *data, int response)
 {
 	if (response == 2)
-		map_failure(map, data, "Please make sure that your map content at \
-		least:\none Collector\none Exit\n");
+		map_failure(map, data, "Map must content at least one C and one E\n");
 	else
-		map_failure(map, data, "Please make sure that your map strictely \
-		content one player\n");
+		map_failure(map, data, "Map must content one P\n");
 }
 
 void	ft_error(void)

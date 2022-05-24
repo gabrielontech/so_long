@@ -6,7 +6,7 @@ PM = $(addprefix prog_management/, free_style.c error.c )
 LIBFT = $(addprefix libft/, ft_strncmp.c ft_split.c ft_putstr_fd.c )
 GNL = $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c )
 DISPLAY = $(addprefix displayers/, display_xpm_extends.c display_xpm.c displayer.c ) 
-MOVE = $(addprefix move/, player_move.c player_move_extends.c)
+MOVE = $(addprefix move/, player_move.c)
 INIT_WINDOW = $(addprefix init/, init_window.c)
 
 INCLIB=$(INC)/../lib
